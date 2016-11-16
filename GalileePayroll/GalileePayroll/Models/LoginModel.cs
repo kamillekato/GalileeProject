@@ -9,9 +9,11 @@ namespace GalileePayroll.Models
     public class LoginModel
     {
         [Required(ErrorMessage = "Username is required to login")]
-        public string UserName;
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
         [Required(ErrorMessage = "Password is required to login" )]
         [DataType(DataType.Password)]
-        public string Password;
+        public string Password { get; set; }
+
     }
 }

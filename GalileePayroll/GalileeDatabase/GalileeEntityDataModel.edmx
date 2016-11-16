@@ -14,12 +14,23 @@
           <Property Name="LastName" Type="varchar(max)" />
           <Property Name="MiddleName" Type="varchar(max)" />
           <Property Name="BirthDate" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" />
           <Property Name="Address" Type="varchar(max)" />
           <Property Name="ContactNumber" Type="varchar(max)" />
           <Property Name="MartialStatus" Type="varchar(max)" />
           <Property Name="NumberOfChildren" Type="int" />
           <Property Name="Designation" Type="varchar(max)" />
           <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GALILEE.dbo.ERRORLOG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ERRORLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Date" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -41,6 +52,9 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
           <Property Name="FirstName" Type="varchar(max)" />
           <Property Name="LastName" Type="varchar(max)" />
           <Property Name="MiddleName" Type="varchar(max)" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Birthdate" Type="date" />
           <Property Name="Type" Type="varchar" MaxLength="10" />
           <Property Name="Password" Type="varchar(max)" />
           <Property Name="Salt" Type="varchar(max)" />
@@ -49,6 +63,13 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
         <EntityContainer Name="GALILEEModelStoreContainer">
           <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ERRORLOG" EntityType="Self.ERRORLOG" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ERRORLOG].[ID] AS [ID], 
+    [ERRORLOG].[Message] AS [Message], 
+    [ERRORLOG].[Date] AS [Date]
+    FROM [dbo].[ERRORLOG] AS [ERRORLOG]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -64,6 +85,7 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ContactNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MartialStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -79,14 +101,26 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Birthdate" Type="DateTime" Precision="0" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ERRORLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityContainer Name="GALILEEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
           <EntitySet Name="USERs" EntityType="Self.USER" />
+          <EntitySet Name="ERRORLOGs" EntityType="Self.ERRORLOG" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -102,6 +136,7 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
                 <ScalarProperty Name="MartialStatus" ColumnName="MartialStatus" />
@@ -118,10 +153,22 @@ warning 6013: The table/view 'GALILEE.dbo.TIMESHEET' does not have a primary key
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERRORLOGs">
+            <EntityTypeMapping TypeName="GALILEEModel.ERRORLOG">
+              <MappingFragment StoreEntitySet="ERRORLOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

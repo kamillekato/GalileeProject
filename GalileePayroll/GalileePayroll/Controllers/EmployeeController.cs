@@ -1,7 +1,5 @@
-﻿using GalileeBusinessLogic.Interfaces;
-using GalileeBusinessLogic.Managers;
+﻿using GalileeBusinessLogic.Managers;
 using GalileeDatabase;
-using GalileePayroll.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,60 +8,55 @@ using System.Web.Mvc;
 
 namespace GalileePayroll.Controllers
 {
-    public class UserController : Controller
+    public class EmployeeController : Controller
     {
 
-        IUserManager UserManager = new UserManager();
+        EmployeeManager empManager = new EmployeeManager();
+
          
-        
-        [HttpGet]
-        public ActionResult Login()
-        {
-            LoginModel loginModel = new LoginModel();
-            return View(loginModel);
-        }
 
-        [HttpPost]
-        public ActionResult Login(LoginModel loginModel)
-        { 
-            bool loginAttempt = UserManager.LoginUser(loginModel.UserName, loginModel.Password);
-            if (loginAttempt)
-            {
-                return View(); //change view to another action result
-            }
-            else
-            {
-                //add error to view 'Invalid Username or password'
-                return View();
-            }
-             
+        // GET: Employee
+        public ActionResult Index()
+        {
+            List<EMPLOYEE> employeeList = empManager.GetEmployeeList();
+            return View(employeeList);
         }
 
         [HttpGet]
-        public ActionResult SignUp()
+        public ActionResult Add()
         {
-            USER user = new USER();
             ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
                             new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
                             new SelectListItem { Value = "M",Text="Male"},
                                new SelectListItem {Value = "F", Text ="Female" }
                            }, "Value", "Text");
-            return View(user);
+
+            ViewBag.AlertType = 0;
+            ViewBag.AlertMessage = "";
+            return View();
         }
 
         [HttpPost]
-        public ActionResult SignUp(USER user)
+        public ActionResult Add(EMPLOYEE employee)
         {
-            if (UserManager.IsUserNameExist(user.UserName))
+            ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
+                            new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
+                            new SelectListItem { Value = "M",Text="Male"},
+                               new SelectListItem {Value = "F", Text ="Female" }
+                           }, "Value", "Text");
+            bool isSuccess = empManager.AddEmployee(employee);
+            
+            if (isSuccess)
             {
-                //add error for username exist
+                ViewBag.SuccessMessage = "Employee Successfully Added";
                 return View();
             }
             else
-            {
-                UserManager.AddUser(user);
-                return View();//change View() to another action result
+            { 
+                ViewBag.ErrorMessage = "Something went wrong in adding employee. Please double-check and try again.";
+                return View();
             }
+
         }
 
         [HttpGet]
@@ -74,11 +67,12 @@ namespace GalileePayroll.Controllers
                             new SelectListItem { Value = "M",Text="Male"},
                                new SelectListItem {Value = "F", Text ="Female" }
                            }, "Value", "Text");
-            return View(UserManager.GetUser(id));
-        }
 
+            return View(empManager.GetEmployeeByID(id));
+        }
+        
         [HttpPost]
-        public ActionResult Update(USER user)
+        public ActionResult Update(EMPLOYEE employee)
         {
             ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
                             new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
@@ -86,11 +80,11 @@ namespace GalileePayroll.Controllers
                                new SelectListItem {Value = "F", Text ="Female" }
                            }, "Value", "Text");
 
-            bool isSuccess = UserManager.UpdateUser(user);
+
+            bool isSuccess = empManager.UpdateEmployee(employee);
             if (isSuccess)
             {
-
-                return View();
+                return RedirectToAction("Index","Employee");
             }
             else
             {
@@ -98,31 +92,19 @@ namespace GalileePayroll.Controllers
                 return View();
             }
         }
+        
+        
          
-
-        
-
-
-
-
-
-
-
-
-        
-
-
-        public JsonResult IsUserNameExist(string userName)
+        public JsonResult UpdateDesignation(int id,string designation)
         {
-            bool returnValue = UserManager.IsUserNameExist(userName);
-            return Json(returnValue, JsonRequestBehavior.AllowGet);
+            return Json(empManager.UpdateEmployeeDesignation(id, designation), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Delete(int id)
         {
-            bool returnValue = UserManager.DeleteUser(id);
-            return Json(returnValue, JsonRequestBehavior.AllowGet);
+            bool isSuccess = empManager.DeleteEmployee(id);
+           
+            return Json(isSuccess, JsonRequestBehavior.AllowGet);
         }
-
     }
 }

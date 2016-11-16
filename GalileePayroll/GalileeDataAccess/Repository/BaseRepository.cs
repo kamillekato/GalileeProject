@@ -1,4 +1,5 @@
-﻿using GalileeDatabase;
+﻿using GalileeDataAccess.Interface;
+using GalileeDatabase;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,10 @@ namespace GalileeDataAccess.Repository
 {
     public class BaseRepository<T> where T : class
     {
+
+        //IErrorRepository errorRepo = new ErrorRepository();
+
+        
         public virtual bool Add(T entity)
         {
             bool returnValue = false;
@@ -24,6 +29,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message= ex.Message.ToString() , Date = DateTime.Now });
                 return returnValue;
             }
             return returnValue;
@@ -42,6 +48,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return returnValue;
             }
             return returnValue;
@@ -60,6 +67,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return returnValue;
             }
             return returnValue;
@@ -77,6 +85,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return returnList;
             }
             return returnList;
@@ -94,6 +103,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return returnList;
             }
             return returnList;
@@ -111,6 +121,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                //errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return returnEntity;
             }
             return returnEntity;

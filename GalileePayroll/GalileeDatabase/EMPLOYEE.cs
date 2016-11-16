@@ -19,6 +19,7 @@ namespace GalileeDatabase
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
+        public string Gender { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }
         public string MartialStatus { get; set; }

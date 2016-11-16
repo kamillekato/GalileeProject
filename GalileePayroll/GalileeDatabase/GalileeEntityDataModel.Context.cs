@@ -27,5 +27,6 @@ namespace GalileeDatabase
     
         public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<USER> USERs { get; set; }
+        public virtual DbSet<ERRORLOG> ERRORLOGs { get; set; }
     }
 }

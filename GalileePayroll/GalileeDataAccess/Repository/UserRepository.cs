@@ -10,6 +10,14 @@ namespace GalileeDataAccess.Repository
 {
     public class UserRepository : BaseRepository<USER>,IUserRepository
     {
+        IErrorRepository errorRepo;
+
+        public UserRepository()
+        {
+            errorRepo = new ErrorRepository();
+        }
+
+
         public USER GetUserByUserName(string userName)
         {
             USER user = null;
@@ -22,6 +30,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return user;
             }
             return user; 
@@ -38,6 +47,7 @@ namespace GalileeDataAccess.Repository
             }
             catch (Exception ex)
             {
+                errorRepo.Add(new ERRORLOG() { Message = ex.Message.ToString(), Date = DateTime.Now });
                 return false;
             } 
         }
