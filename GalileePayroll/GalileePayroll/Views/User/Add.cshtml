@@ -1,0 +1,128 @@
+﻿@model GalileeDatabase.USER
+
+<div class="row"> 
+    <div class="col-md-10">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @*<div id="" class="form-horizontal">*@
+                <header class="userHeader">ADD USER </header>
+           
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <header class="col-md-offset-1 col-md-11 subheaderAddUser">Credentials</header>
+            </div>
+             
+            <div class="row rowAddUser">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                    @Html.LabelFor(model => model.UserName,"Username", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control col-md-4" , @placeholder="Username" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>       
+                     </div>
+                </div>
+            </div>
+
+            <div class="row rowAddUser">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" ,@placeholder= "Password"} })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row rowAddUser">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="confirmPassword" class="control-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <header class="subheaderAddUser col-md-11 col-md-offset-1">Information</header>
+            </div>
+                <div class="row rowAddUser" >
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstName,"First name", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.LastName,"Middle name", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.MiddleName,"Last name", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="row rowAddUser">
+                <div class="col-md-offset-1 col-md-11">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Gender, (SelectList)ViewBag.ListOfGender, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="row rowAddUser">
+                <div class="col-md-11 col-md-offset-1">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                     
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div> 
+
+
+        }
+    </div>
+</div>
+
+@section navPillsItem{
+    <li id="firstNavItem"  class="active"><a>Users</a></li>
+    <li class=""><a>Add User</a></li>
+    <li><a>Update User</a></li>
+    <li><a>Delete User</a></li>
+    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -40,7 +40,7 @@ namespace GalileePayroll.Controllers
         }
 
         [HttpGet]
-        public ActionResult SignUp()
+        public ActionResult Add ()
         {
             USER user = new USER();
             ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
@@ -48,11 +48,15 @@ namespace GalileePayroll.Controllers
                             new SelectListItem { Value = "M",Text="Male"},
                                new SelectListItem {Value = "F", Text ="Female" }
                            }, "Value", "Text");
+            ViewBag.ListOfType = new SelectList(new List<SelectListItem> {
+                            new SelectListItem { Value = "Admin",Text= "Admin",Selected = true },
+                            new SelectListItem { Value = "Regular",Text = "Regular" }
+                            });
             return View(user);
         }
 
         [HttpPost]
-        public ActionResult SignUp(USER user)
+        public ActionResult Add(USER user)
         {
             if (UserManager.IsUserNameExist(user.UserName))
             {
