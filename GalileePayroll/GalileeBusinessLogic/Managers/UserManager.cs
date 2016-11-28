@@ -22,7 +22,7 @@ namespace GalileeBusinessLogic.Managers
 
         public bool AddUser(USER user)
         {
-            string salt = string.Empty;
+            string salt = string.Empty; 
             user.Password = pwdManager.GeneratePasswordHash(user.Password, out salt);
             user.Salt = salt;
             return userRepo.Add(user);

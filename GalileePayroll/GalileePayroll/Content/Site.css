@@ -5,7 +5,8 @@
 
 .navbar-inverse{ 
     background-color:#4CAF50;
-    border:none;
+    border-bottom-color:#4CAF50;
+    /*border:none;*/
 }
 .navbar-inverse .navbar-brand {
     color: #ffffff;
@@ -45,9 +46,8 @@ textarea {
 .subheaderAddUser{
     margin-top:20px;
     margin-bottom: 10px;
-    font-size:18px;
-    color:#4CAF50;
-    font-weight:bold;
+    font-size:16px; 
+    color:#616161;  
 }
 .nav-pills > li > a {
     border-radius: 0px;
@@ -58,8 +58,7 @@ textarea {
     margin-bottom:1px;
 }
 .nav > li > a:hover, .nav > li > a:focus {
-     border-radius: 0px;
-    border-bottom:1px solid #BDBDBD;
+     border-radius: 0px; 
     color:#fff;
     background-color:#BDBDBD;
 }
@@ -95,10 +94,11 @@ textarea {
 }
 
 
-
 .rowAddUser{
      margin-bottom:7px;
 }
+
+
 #loginContainer{
     border-radius:7px;
     margin-top:80px;  
@@ -112,20 +112,40 @@ textarea {
 #firstNavItem{
     margin-top:2px;
 }
-#userTextHeader{ 
-    font-weight:bold;
+#userTextHeader{  
     font-size:25px;
 }
 
 .control-label {
     color:#757575;
+    font-weight:normal;
 }
 .userHeader{
-    font-size:35px;
-    color: #4CAF50  ;  
+    font-size:  20px;  
+    color:#616161;
+    border-bottom:2px solid #4CAF50;
+}
+
+.form-control:focus{
+    border-color:#4CAF50;
+    
 }
 
 #btnLogin{
     margin-top:45px; 
     font-size:25px;
+}
+#viewContent{
+    margin-top: 30px;
+}
+
+.deleteModalHeader  {
+    background-color:#4CAF50; 
+    border-radius:5px 5px 0px 0px; 
+    color:#fff;
+} 
+
+.deleteModalFooter{
+    border-radius:0px 0px 5px 5px;
+    border:none;
 }

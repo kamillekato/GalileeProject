@@ -43,15 +43,7 @@ namespace GalileePayroll.Controllers
         public ActionResult Add ()
         {
             USER user = new USER();
-            ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
-                            new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
-                            new SelectListItem { Value = "M",Text="Male"},
-                               new SelectListItem {Value = "F", Text ="Female" }
-                           }, "Value", "Text");
-            ViewBag.ListOfType = new SelectList(new List<SelectListItem> {
-                            new SelectListItem { Value = "Admin",Text= "Admin",Selected = true },
-                            new SelectListItem { Value = "Regular",Text = "Regular" }
-                            });
+            
             return View(user);
         }
 
@@ -103,7 +95,11 @@ namespace GalileePayroll.Controllers
             }
         }
          
+        public ActionResult _RenderDeletePartial()
+        {
+            return PartialView("PDelete");
 
+        }
         
 
 

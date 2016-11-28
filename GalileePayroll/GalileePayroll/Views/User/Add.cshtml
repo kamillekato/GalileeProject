@@ -1,71 +1,75 @@
 ﻿@model GalileeDatabase.USER
-
-<div class="row"> 
+@{ 
+    ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
+                            new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
+                            new SelectListItem { Value = "M",Text="Male"},
+                               new SelectListItem {Value = "F", Text ="Female" }
+                           }, "Value", "Text");
+    ViewBag.ListOfType = new SelectList(new List<SelectListItem> {
+                            new SelectListItem { Value = "Admin",Text= "Admin",Selected = true },
+                            new SelectListItem { Value = "Regular",Text = "Regular" }
+                            }, "Value", "Text");
+}
+<div id="viewContent" class="row"> 
     <div class="col-md-10">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             @*<div id="" class="form-horizontal">*@
-                <header class="userHeader">ADD USER </header>
-           
+                <header class="userHeader">ADD USER </header> 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="row">
-                <header class="col-md-offset-1 col-md-11 subheaderAddUser">Credentials</header>
+                <div class="col-md-12   ">
+                    <text class="text-danger">Required(*)</text>
+                </div>
             </div>
-             
+            <div class="row">
+                <header class="col-md-offset-1 col-md-11 subheaderAddUser"><span class="badge"  style="background-color:#337ab7">1</span>  Credentials</header>
+            </div>
+
             <div class="row rowAddUser">
                 <div class="col-md-11 col-md-offset-1">
                     <div class="row">
                         <div class="col-md-4">
-                    @Html.LabelFor(model => model.UserName,"Username", htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control col-md-4" , @placeholder="Username" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                            </div>       
+                            @Html.LabelFor(model => model.UserName, "Username", htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control col-md-4", @placeholder = "Username" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            <label for="confirmPassword" class="control-label">Confirm Password</label><span class="text-danger">*</span>
+                            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" />
+                        </div>
                      </div>
                 </div>
             </div>
 
-            <div class="row rowAddUser">
-                <div class="col-md-11 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-4">
-                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" ,@placeholder= "Password"} })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row rowAddUser">
-                <div class="col-md-11 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="confirmPassword" class="control-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="row ">
-                <header class="subheaderAddUser col-md-11 col-md-offset-1">Information</header>
+                <header class="subheaderAddUser col-md-11 col-md-offset-1"><span class="badge" style="background-color:#337ab7">2</span>  Information</header>
             </div>
                 <div class="row rowAddUser" >
                 <div class="col-md-11 col-md-offset-1">
                     <div class="row">
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.FirstName,"First name", htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.FirstName, "First name", htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.LastName,"Middle name", htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.LastName, "Middle name", htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.MiddleName,"Last name", htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.MiddleName, "Last name", htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                             @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
                         </div>
@@ -81,13 +85,13 @@
                             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                             @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => model.Type, (SelectList)ViewBag.ListOfType, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -99,30 +103,54 @@
                     @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
-                     
-
-                    
-
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
-                    </div> 
+            </div> 
+            <div class="row" style="margin-top:18px">
+                <div class="col-md-11 col-md-offset-1">
+                    <input type="submit" value="Add" class="btn btn-primary" style="width:120px;" />
+                    <button type="button" class="btn btn-danger" style="width:120px;">Cancel</button> 
+                </div> 
+            </div> 
 
 
         }
     </div>
-</div>
-
+</div> 
+@{ Html.RenderPartial("PDelete");}
 @section navPillsItem{
-    <li id="firstNavItem"  class="active"><a>Users</a></li>
-    <li class=""><a>Add User</a></li>
-    <li><a>Update User</a></li>
-    <li><a>Delete User</a></li>
+    <li id="firstNavItem"  class="itemSideMenu"><a>Users</a></li>
+    <li class="active itemSideMenu"><a>Add User</a></li>
+    <li class="itemSideMenu"><a>Update User</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#deleteModal" onclick="BackToStepOne()"><a >Delete User</a></li>
     }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        var checkUsernameUrl = '@Url.Action("IsUserNameExist","User")';
+        function CheckUsername(userName) {
+            $.ajax({
+                url: checkUsernameUrl,
+                data: {userName : userName},
+                type: 'GET',
+                success: function (data) {
+                    if (data == false) {
+                        $("#deleteUsernameError").text("Username does not exist");
+                    } else {
+                        $("#deleteStepOne").hide();
+                        $("#deleteStepTwo").show();
+                    }
+                }
+
+            });
+        }
+
+        function BackToStepOne() {
+            $("#deleteStepOne").show();
+            $("#deleteStepTwo").hide();
+            $("#deleteUsernameError").text("");
+            $("#deleteUsername").val("");
+        }
+    </script>
+
 }
