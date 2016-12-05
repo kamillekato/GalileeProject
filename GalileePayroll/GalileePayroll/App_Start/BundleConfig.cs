@@ -26,6 +26,11 @@ namespace GalileePayroll
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/userScripts").Include(
+                        "~/Scripts/UserScripts/UserDelete.js",
+                        "~/Scripts/UserScripts/UserUpdate.js"
+                        ));
         }
     }
 }

@@ -174,8 +174,13 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\UserScripts.js" />
+    <Content Include="Scripts\UserScripts\UserDelete.js" />
+    <Content Include="Scripts\UserScripts\UserUpdate.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -194,6 +199,8 @@
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\User\PDelete.cshtml" />
     <Content Include="Views\User\PError.cshtml" />
+    <Content Include="Views\User\PUpdate.cshtml" />
+    <Content Include="Views\User\ViewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

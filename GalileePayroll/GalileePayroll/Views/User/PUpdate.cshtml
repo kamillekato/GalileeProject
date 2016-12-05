@@ -1,0 +1,30 @@
+﻿@using (Html.BeginForm("Update", "User", FormMethod.Get, new {@id="updateForm" }))
+{
+<div id="updateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header updateModalHeader" style="background-color:#4CAF50; border-radius:5px 5px 0px 0px; color:#fff">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalUpdateUserHeader" class="modal-title">Update User</h4>
+            </div>
+            <div class="modal-body">
+                <div >
+                    
+                    
+                    <label class="control-label" for="userName">Enter username of the user you want to update</label>
+                    <input id="updateUsername" type="text" class="form-control" placeholder="Username" oninput="$('#updateUsernameError').text('');" name="userName" />
+                    <span id="updateUsernameError" class="text-danger"></span>
+                    
+                </div>
+            </div>
+            <div class="modal-footer updateModalFooter" style="border:none;">
+                <button type="button" class="btn btn-primary" onclick="CheckUsernameInUpdate($('#updateUsername').val());">Done</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+ 

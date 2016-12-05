@@ -1,6 +1,6 @@
 ﻿
 
-<div id="deleteModal" class="modal fade" role="dialog">
+<div id="deleteModal" class="modal fade" role="dialog" >
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header deleteModalHeader">
@@ -10,17 +10,22 @@
             <div class="modal-body">
                 <div id="deleteStepOne">
                     <label class="control-label" for="deleteUsername">Enter username of the user you want to delete</label>
-                    <input id="deleteUsername" type="text" class="form-control" placeholder="Username" name="deleteUsername"/>
+                    <input id="deleteUsername" type="text" class="form-control" placeholder="Username"  oninput="$('#deleteUsernameError').text('');" name="deleteUsername"/>
                     <span id="deleteUsernameError" class="text-danger" ></span>
                 </div>
                 <div id="deleteStepTwo" hidden>
-                    <label class="control-label" >Do you want to delete this user?</label>
+                    <label class="control-label">Do you want to delete this user?</label>
+                    <span style="margin-left:15px">Username : </span><span id="currentDeleteUsername" >Username : </span><br />
+                    <span style="margin-left:15px">Name : </span><span id="currentDeleteName" >Name : </span><br />
                 </div>
             </div>
             <div class="modal-footer deleteModalFooter">
-                <button type="button" class="btn btn-primary" onclick="CheckUsername($('#deleteUsername').val())">Done</button>
+                <button id="doneDeleteModalButton" type="button" class="btn btn-primary" onclick="CheckUsername($('#deleteUsername').val())">Done</button>
+                <button id="deleteModalButton" type="button" class="btn btn-primary" onclick="DeleteUser($('#currentDeleteUsername').text())" hidden>Delete</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+ 

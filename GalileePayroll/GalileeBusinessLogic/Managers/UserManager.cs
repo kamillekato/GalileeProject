@@ -43,9 +43,9 @@ namespace GalileeBusinessLogic.Managers
             return userRepo.IsUserNameExist(userName);
         }
 
-        public bool DeleteUser(int id)
+        public bool DeleteUser(string username)
         {
-            USER user = GetUser(id);
+            USER user = GetUserByUsername(username);
             return userRepo.Delete(user);
         }
 
@@ -59,6 +59,13 @@ namespace GalileeBusinessLogic.Managers
             return userRepo.Get(user => user.ID == id);
         }
 
+
+
+
+        public USER GetUserByUsername(string userName)
+        {
+            return userRepo.GetUserByUserName(userName);
+        }
         public List<USER> GetAllListOfUserByType(string type)
         {
             return userRepo.GetList(user => user.Type == type);

@@ -115,42 +115,25 @@
         }
     </div>
 </div> 
+@{ Html.RenderPartial("PUpdate");}
 @{ Html.RenderPartial("PDelete");}
 @section navPillsItem{
     <li id="firstNavItem"  class="itemSideMenu"><a>Users</a></li>
-    <li class="active itemSideMenu"><a>Add User</a></li>
-    <li class="itemSideMenu"><a>Update User</a></li>
-    <li class="itemSideMenu" data-toggle="modal" data-target="#deleteModal" onclick="BackToStepOne()"><a >Delete User</a></li>
+    <li class="active itemSideMenu" onclick="location.href='@Url.Action("Add","User")'"><a>Add User</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#updateModal" data-backdrop="static" data-keyboard="false"><a>Update User Information</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#deleteModal" data-backdrop="static" data-keyboard="false" onclick="BackToStepOne()"><a >Delete User</a></li>
     }
 
 @section Scripts {
+            
     @Scripts.Render("~/bundles/jqueryval")
-    
     <script>
-        var checkUsernameUrl = '@Url.Action("IsUserNameExist","User")';
-        function CheckUsername(userName) {
-            $.ajax({
-                url: checkUsernameUrl,
-                data: {userName : userName},
-                type: 'GET',
-                success: function (data) {
-                    if (data == false) {
-                        $("#deleteUsernameError").text("Username does not exist");
-                    } else {
-                        $("#deleteStepOne").hide();
-                        $("#deleteStepTwo").show();
-                    }
-                }
-
-            });
-        }
-
-        function BackToStepOne() {
-            $("#deleteStepOne").show();
-            $("#deleteStepTwo").hide();
-            $("#deleteUsernameError").text("");
-            $("#deleteUsername").val("");
-        }
+        var deleteUserUrl = '@Url.Action("Delete","User")';
+        var getNameOfUserUrl = '@Url.Action("GetNameOfUser","User")';
+        var checkUsernameUrl = '@Url.Action("IsUserNameExist","User")'; 
+        var gotoUpdate = '@Url.Action("Update", "User")';
     </script>
+    @Scripts.Render("~/bundles/userScripts")
+     
 
 }

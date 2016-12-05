@@ -63,14 +63,22 @@ namespace GalileePayroll.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update(int id)
+        public ActionResult Update(string userName)
         {
             ViewBag.ListOfGender = new SelectList(new List<SelectListItem> {
                             new SelectListItem { Value="U",Text= "Unspecified",Selected =true },
                             new SelectListItem { Value = "M",Text="Male"},
                                new SelectListItem {Value = "F", Text ="Female" }
                            }, "Value", "Text");
-            return View(UserManager.GetUser(id));
+            var getUser = UserManager.GetUserByUsername(userName);
+            if (getUser== null)
+            {
+                return null;
+            }
+            else
+            {
+                return View(getUser);
+            }
         }
 
         [HttpPost]
@@ -94,12 +102,15 @@ namespace GalileePayroll.Controllers
                 return View();
             }
         }
-         
-        public ActionResult _RenderDeletePartial()
-        {
-            return PartialView("PDelete");
 
+
+        public ActionResult ViewUser(string username)
+        {
+            var user = UserManager.GetUserByUsername(username);
+
+            return View(user);
         }
+
         
 
 
@@ -118,10 +129,18 @@ namespace GalileePayroll.Controllers
             return Json(returnValue, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Delete(int id)
+        public JsonResult Delete(string username)
         {
-            bool returnValue = UserManager.DeleteUser(id);
-            return Json(returnValue, JsonRequestBehavior.AllowGet);
+            bool returnValue = UserManager.DeleteUser(username);
+            var getUser = UserManager.GetUserByUsername(username);
+            return Json(new { deleteStatus = returnValue }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetNameOfUser(string username)
+        {
+            var returnValue = UserManager.GetUserByUsername(username);
+
+            return Json(new { Name = returnValue.FirstName + ' ' + returnValue.LastName }, JsonRequestBehavior.AllowGet);
         }
 
     }
