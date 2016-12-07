@@ -21,9 +21,9 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="row">
-                <div class="col-md-12   ">
+                <div class="col-md-12">
                     <text class="text-danger">Required(*)</text>
-                </div>
+                </div> 
             </div>
             <div class="row">
                 <header class="col-md-offset-1 col-md-11 subheaderAddUser"><span class="badge"  style="background-color:#337ab7">1</span>  Credentials</header>
@@ -117,11 +117,13 @@
 </div> 
 @{ Html.RenderPartial("PUpdate");}
 @{ Html.RenderPartial("PDelete");}
+@{ Html.RenderPartial("PView");}
 @section navPillsItem{
     <li id="firstNavItem"  class="itemSideMenu"><a>Users</a></li>
     <li class="active itemSideMenu" onclick="location.href='@Url.Action("Add","User")'"><a>Add User</a></li>
     <li class="itemSideMenu" data-toggle="modal" data-target="#updateModal" data-backdrop="static" data-keyboard="false"><a>Update User Information</a></li>
     <li class="itemSideMenu" data-toggle="modal" data-target="#deleteModal" data-backdrop="static" data-keyboard="false" onclick="BackToStepOne()"><a >Delete User</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#viewModal" data-backdrop="static" data-keyboard="false" onclick=""><a>View User Details</a></li>
     }
 
 @section Scripts {

@@ -120,6 +120,31 @@ textarea {
     color:#757575;
     font-weight:normal;
 }
+#dt-label{
+    text-align:left;
+    width:120px;
+}
+.dl-horizontal dd{
+    margin-left:0px;
+}
+dt{ 
+} 
+dd{
+    color: #757575;
+    margin-bottom:15px; 
+}
+.details-label{
+    color: #757575;
+    font-weight: normal;
+}
+
+.details-content{
+    color:#424242;
+    font-weight:normal;
+    font-size: 18px;
+    border-bottom:1px solid #ccc; 
+}
+
 .userHeader{
     font-size:  20px;  
     color:#616161;
@@ -153,6 +178,10 @@ textarea {
     margin-top: 100px;
 }
 #updateModal{
+    margin-top:100px;
+}
+
+#viewModal{
     margin-top:100px;
 }
  

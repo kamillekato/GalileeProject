@@ -177,6 +177,7 @@
     <Content Include="Scripts\UserScripts.js" />
     <Content Include="Scripts\UserScripts\UserDelete.js" />
     <Content Include="Scripts\UserScripts\UserUpdate.js" />
+    <Content Include="Scripts\UserScripts\UserView.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -201,6 +202,7 @@
     <Content Include="Views\User\PError.cshtml" />
     <Content Include="Views\User\PUpdate.cshtml" />
     <Content Include="Views\User\ViewUser.cshtml" />
+    <Content Include="Views\User\PView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

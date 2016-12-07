@@ -1,92 +1,119 @@
 ﻿@model GalileeDatabase.USER
 
-<div>
-    <h4>USER</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+<div id="viewContent" class="row">
+    <div class="col-md-7">
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+        <header class="userHeader">View User</header> 
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+                <dl class="dl-horizontal" style="margin-top:20px;">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+                    <dt id="dt-label">
+                        Username
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.UserName)
+                </dd>
+                    <dt id="dt-label">
+                        First name
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
+                    <dd>@Html.DisplayFor(model => model.FirstName)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
+                    <dt id="dt-label" >
+                        Last name
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
+                    <dd>@Html.DisplayFor(model => model.LastName)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+                    <dt id="dt-label">
+                        Middle name
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                    <dd >@Html.DisplayFor(model => model.MiddleName)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                    <dt id="dt-label">
+                        Gender
+                    </dt> 
+                        @{
+                            if (Model.Gender == "M")
+                            {
+                                <dd>Male</dd>
+                            }
+                            else
+                            {
+                                <dd>Female</dd>
+                            }
+                        } 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthdate)
-        </dt>
+                    <dt id="dt-label">
+                        Address
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Birthdate)
-        </dd>
+                    <dd>@Html.DisplayFor(model => model.Address)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+                    <dt id="dt-label">
+                        Birthdate
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
+                    <dd>@Html.DisplayFor(model => model.Birthdate)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                    <dt id="dt-label">
+                        Type
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                    <dd>@Html.DisplayFor(model => model.Type)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Salt)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Salt)
-        </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="button" class="btn btn-primary" value="Update" style="width:120px;" onclick="location.href='@Url.Action("Update","User", new { userName = Model.UserName})'" />
+                <input type="button" class="btn btn-danger" value="Delete" style="width:120px;" onclick="OpenDeleteModal('@Model.UserName','@Model.FirstName' + ' ' + '@Model.LastName');"/>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+</div> 
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+ @{ Html.RenderPartial("PUpdate");}
+@{ Html.RenderPartial("PDelete");}
+@{ Html.RenderPartial("PView");}
+@section navPillsItem{
+    <li id="firstNavItem" class="itemSideMenu"><a>Users</a></li>
+    <li class="active itemSideMenu" onclick="location.href='@Url.Action("Add","User")'"><a>Add User</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#updateModal" data-backdrop="static" data-keyboard="false"><a>Update User Information</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#deleteModal" data-backdrop="static" data-keyboard="false" onclick="BackToStepOne()"><a>Delete User</a></li>
+    <li class="itemSideMenu" data-toggle="modal" data-target="#viewModal" data-backdrop="static" data-keyboard="false" onclick=""><a>View User Details</a></li>
+}
+@section Scripts {
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var deleteUserUrl = '@Url.Action("Delete","User")';
+        var getNameOfUserUrl = '@Url.Action("GetNameOfUser","User")';
+        var checkUsernameUrl = '@Url.Action("IsUserNameExist","User")';
+        var gotoUpdate = '@Url.Action("Update", "User")';
+        function OpenDeleteModal(userName, name) {
+            $("#currentDeleteUsername").text(userName);
+            $("#currentDeleteName").text(name);
+            $("#deleteStepOne").hide();
+            $("#deleteStepTwo").show();
+            $("#deleteModalButton").show();
+            $("#doneDeleteModalButton").hide();
+            $("#deleteModal").modal("show");
+        }
+    </script>
+    @Scripts.Render("~/bundles/userScripts")
+
+
+} 

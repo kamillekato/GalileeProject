@@ -9,7 +9,7 @@ function DeleteUser(username) {
             if (data.deleteStatus == false) {
                 alert('failed');
             } else {
-                //close delete mdoal
+                //close delete modal
             }
 
 

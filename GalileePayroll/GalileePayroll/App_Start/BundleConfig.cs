@@ -29,7 +29,8 @@ namespace GalileePayroll
 
             bundles.Add(new ScriptBundle("~/bundles/userScripts").Include(
                         "~/Scripts/UserScripts/UserDelete.js",
-                        "~/Scripts/UserScripts/UserUpdate.js"
+                        "~/Scripts/UserScripts/UserUpdate.js",
+                        "~/Scripts/UserScripts/UserView.js"
                         ));
         }
     }
